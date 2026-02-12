@@ -8,7 +8,7 @@ import ScrollIndicator from './ScrollIndicator';
 import FeaturesSectionDemo from '@/components/ui/features-section-demo-2';
 import { VortexBackground } from '@/components/ui/vortex-background';
 import Me from "../assets/Me.png";
-import MyImage from "../assets/MyImage.jpeg";
+import MyImage from "../assets/MyImage.png";
 
 const Home = () => {
 
