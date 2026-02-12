@@ -62,7 +62,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { VortexBackground } from "@/components/ui/vortex-background";
+
 import LoadingScreen from "./components/LoadingScreen";
 import { useLoading } from "./hooks/useLoading";
 
@@ -110,10 +110,7 @@ const AppContent = () => {
         }}
       />
 
-      {/* Animated Vortex */}
-      <div className="fixed inset-0 z-1">
-        <VortexBackground />
-      </div>
+
 
       <Toaster />
       <Sonner />

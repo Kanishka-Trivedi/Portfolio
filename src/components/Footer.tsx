@@ -404,6 +404,7 @@ import { Heart, ArrowUp, Youtube, Github, Twitter, Linkedin, Mail } from 'lucide
 
 import { FaReact } from "react-icons/fa";
 import { SiTypescript, SiTailwindcss, SiVite } from "react-icons/si";
+import Logo from "../assets/Logo1.png";
 
 interface Particle {
   x: number;
@@ -658,7 +659,7 @@ const Footer: React.FC = () => {
                 <div className="relative flex items-center space-x-4 bg-gray-900/80 backdrop-blur-xl rounded-lg p-6 border border-gray-800/50">
                   <div className="relative">
                     <img 
-                      src="/Logo1.png" 
+                      src={Logo} 
                       alt="Kanishka" 
                       className="h-14 w-15 rounded-xl animate-[spin_10s_linear_infinite] hover:pause"
                       style={{ animationPlayState: 'running' }}

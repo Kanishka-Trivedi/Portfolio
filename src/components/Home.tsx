@@ -6,6 +6,9 @@ import { FileChartColumn } from './FileChartColumn';
 import { Github, Linkedin, Twitter, Youtube } from "lucide-react";
 import ScrollIndicator from './ScrollIndicator';
 import FeaturesSectionDemo from '@/components/ui/features-section-demo-2';
+import { VortexBackground } from '@/components/ui/vortex-background';
+import Me from "../assets/Me.png";
+import MyImage from "../assets/MyImage.jpeg";
 
 const Home = () => {
 
@@ -22,6 +25,9 @@ const Home = () => {
 
   return (
     <>
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <VortexBackground />
+      </div>
       {/* ---------------- HERO SECTION ---------------- */}
       <section className="relative min-h-screen w-full flex items-center overflow-hidden pt-0 md:pt-0">
         <div className="container mx-auto px-6 z-10 relative flex flex-col justify-start h-full">
@@ -41,7 +47,7 @@ const Home = () => {
                 <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-blue-500/30 p-1.5 bg-black/50 backdrop-blur-sm shadow-2xl">
                   <div className="w-full h-full rounded-full overflow-hidden relative">
                     <img
-                      src="/MyImage.jpeg"
+                      src={MyImage}
                       alt="Kanishka Trivedi"
                       className="w-full h-full object-cover transition-all duration-700 scale-105 hover:scale-100"
                     />
@@ -161,9 +167,9 @@ const Home = () => {
                 <div className="absolute -top-4 -right-4 w-full h-full border-2 border-orange-500 rounded-tr-[40px] rounded-bl-[40px]"></div>
 
                 <img
-                  src="/Me.png"
+                  src={Me}
                   alt="About Kanishka"
-                  className="relative w-[320px] md:w-[400px] lg:w-[350px] object-cover rounded-tr-[40px] rounded-bl-[40px] shadow-2xl"
+                  className="relative w-[400px] md:w-[400px] h-[500px] lg:w-[360px] object-cover rounded-tr-[40px] rounded-bl-[40px] shadow-2xl"
                 />
               </div>
             </motion.div>
@@ -189,7 +195,7 @@ const Home = () => {
 
       {/* GitHub Contribution Chart Section */}
       <section className="section-container pb-20 pt-10">
-        <motion.div 
+        <motion.div
           className="max-w-6xl mx-auto px-6"
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -208,9 +214,9 @@ const Home = () => {
               <span className="text-lg font-medium text-gray-300">@Kanishka-Trivedi on GitHub</span>
             </div>
             <div className="overflow-x-auto overflow-y-hidden pb-4 custom-scrollbar">
-              <img 
-                src="https://ghchart.rshah.org/7c3aed/Kanishka-Trivedi" 
-                alt="Kanishka's GitHub Contributions" 
+              <img
+                src="https://ghchart.rshah.org/7c3aed/Kanishka-Trivedi"
+                alt="Kanishka's GitHub Contributions"
                 className="min-w-[800px] w-full filter contrast-125 saturate-150"
               />
             </div>

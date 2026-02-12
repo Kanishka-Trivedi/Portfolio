@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Mail, Github, Linkedin, Send, Download, Eye, FileText, X, Code2, MessageSquare, User, MessageCircle, Twitter } from 'lucide-react';
 import AnimatedCard from './AnimatedCard';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
+import Connect from '../assets/Connect.json';
+import Lottie from 'lottie-react';
 
 const contactMethods = [
   {
@@ -76,16 +78,22 @@ const codingPlatforms = [
 ];
 
 const DeveloperStats = () => (
-  <Card className="glowing-card bg-gray-900/70 border-gray-800 rounded-xl transition-all duration-300 overflow-hidden h-full flex flex-col justify-center">
+  <Card className="glowing-card bg-gray-900 border-gray-800 rounded-xl transition-all duration-300 overflow-hidden h-full flex flex-col justify-center">
     <CardContent>
       {/* GIF Section */}
-      <div className="mb-6 flex justify-center">
+      {/* <div className="mb-6 flex justify-center">
         <div className="relative rounded-xl overflow-hidden">
           <img
             src="Connect.gif"
             alt="Developer Animation"
             className="w-full h-[300px] object-cover rounded-xl"
           />
+        </div>
+      </div> */}
+
+      <div className="mb-6 flex justify-center">
+        <div className="w-[320px]">
+          <Lottie animationData={Connect} loop={true} />
         </div>
       </div>
 
@@ -372,6 +380,25 @@ const ContactForm = () => {
 const Contact = () => {
   return (
     <section id="contact" className="section-container">
+      {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        <motion.div
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
+        />
+      </div>
       <div className="text-center mb-12">
         <h2 className="section-title">Let's connect</h2>
       </div>

@@ -253,6 +253,26 @@ const SkillsSphere: React.FC = () => {
   return (
     <div className="w-full flex flex-col items-center">
 
+            {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 opacity-[0.15]"
+                style={{
+                  backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+                  backgroundSize: '40px 40px'
+                }}
+              />
+              <motion.div
+                animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
+              />
+              <motion.div
+                animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
+              />
+            </div>
+
       {/* TITLE — perfectly centered above sphere */}
       <div className="pt-8 pb-0 mb-0 text-center">
         <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-[#7dd3fc] mb-3 drop-shadow-lg">

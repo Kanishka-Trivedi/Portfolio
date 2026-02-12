@@ -11,6 +11,7 @@ import {
   X,
   Sparkles,
 } from 'lucide-react';
+import Logo from "../assets/Logo1.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +55,7 @@ const Navbar = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 rounded-full blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-500"></div>
             </div>
             <img 
-              src="/Logo1.png" 
+              src={Logo} 
               alt="Kanishka Logo" 
               className="h-14 w-20 relative z-10" 
             />

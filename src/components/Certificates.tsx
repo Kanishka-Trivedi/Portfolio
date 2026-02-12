@@ -954,19 +954,26 @@ export default function Certificates() {
                 paddingTop: "80px", // Add space for fixed navbar
             }}
         >
-            {/* Background Gradient */}
-            <div
-                className="fixed inset-0 z-0"
-                style={{
-                    background:
-                        "radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%)",
-                }}
-            />
+      {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
+        <motion.div
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
+        />
+      </div>
 
-            {/* Animated Vortex Background */}
-            <div className="fixed inset-0 z-1">
-                <VortexBackground />
-            </div>
             {/* Main Content */}
             <div className="relative z-20 px-3 sm:px-4 md:px-6 lg:px-8 pb-16">
                 <div className="max-w-7xl mx-auto">
