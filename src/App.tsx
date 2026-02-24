@@ -79,6 +79,7 @@ import Technologies from '@/components/Technologies';
 import Certificates from '@/components/Certificates';
 import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
+import WorkSection from "./components/WorkSection";
 
 const queryClient = new QueryClient();
 
@@ -122,6 +123,7 @@ const AppContent = () => {
           <Route path="/technologies" element={<Layout><Technologies /></Layout>} />
           <Route path="/certificates" element={<Layout><Certificates /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/work" element={<Layout><WorkSection /></Layout>} />
           <Route path="*" element={<Layout><NotFound /></Layout>} />
         </Routes>
       </BrowserRouter>
