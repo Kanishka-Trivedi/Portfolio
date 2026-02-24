@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   Sparkles,
+  Trophy,
 } from 'lucide-react';
 import Logo from "../assets/Logo1.png";
 
@@ -33,7 +34,7 @@ const Navbar = () => {
   const navItems = [
     { href: "/", label: "Home", icon: User },
     { href: "/technologies", label: "Skills", icon: Brain },
-    { href: "/certificates", label: "Certificates", icon: User },
+    { href: "/certificates", label: "Hall Of Fame", icon: Trophy },
     { href: "/projects", label: "Projects", icon: Code2 },
     
   ];

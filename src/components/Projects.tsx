@@ -369,6 +369,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   Github, 
   ExternalLink, 
@@ -569,6 +570,7 @@ const projects: Project[] = [
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState('All Projects');
+  const navigate = useNavigate();
 
   const categories = [
     { name: 'All Projects', icon: <Rocket size={16} />, count: projects.length },
@@ -764,7 +766,7 @@ const ProjectsPage = () => {
           <p className="text-[#707070] mb-10 max-w-lg mx-auto font-medium text-lg relative z-10 leading-relaxed">
             I'm always open to discussing new projects and opportunities.
           </p>
-          <button className="relative z-10 inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-[#7a62ff] to-[#a855f7] rounded-full font-bold text-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_10px_40px_-10px_rgba(122,98,255,0.4)]">
+          <button onClick={() => navigate('/contact')} className="relative z-10 inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-[#7a62ff] to-[#a855f7] rounded-full font-bold text-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_10px_40px_-10px_rgba(122,98,255,0.4)]">
             Let's Talk <ArrowRight size={20} className="stroke-[3px]" />
           </button>
         </motion.section>

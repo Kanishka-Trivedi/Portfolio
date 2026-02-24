@@ -1,537 +1,3 @@
-// import React, { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-// import { Button } from "@/components/ui/button";
-// import { ExternalLink, Eye, Award, Calendar, Building2, X, Download, Share2, CheckCircle2, Copy, Check } from 'lucide-react';
-
-// // Certificate interface
-// interface Certificate {
-//     id: number;
-//     title: string;
-//     description: string;
-//     image: string;
-//     category: string;
-//     issuer: string;
-//     date: string;
-//     credentialUrl?: string;
-//     previewUrl?: string;
-//     credentialId?: string;
-//     skills?: string[];
-//     fullDescription?: string;
-// }
-
-// // Sample certificate data
-// const certificatesData: Certificate[] = [
-//     {
-//         id: 1,
-//         title: "AWS Certified Solutions Architect",
-//         description: "Professional cloud architecture certification",
-//         fullDescription: "Earned the AWS Solutions Architect certification from Amazon Web Services, demonstrating mastery in cloud infrastructure design, deployment strategies, and best practices for building scalable applications.",
-//         image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-//         category: "Cloud",
-//         issuer: "Amazon Web Services",
-//         date: "2024",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "AWS-SAA-2024-XY789Z",
-//         skills: ["AWS", "Cloud Architecture", "EC2", "S3", "Lambda"]
-//     },
-//     {
-//         id: 2,
-//         title: "React Advanced Patterns",
-//         description: "Advanced React development and optimization",
-//         fullDescription: "Completed advanced React certification covering modern patterns, performance optimization, state management, and building scalable enterprise applications.",
-//         image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=800&q=80",
-//         category: "Frontend",
-//         issuer: "Meta",
-//         date: "2024",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "META-REACT-2024-AB123C",
-//         skills: ["React", "TypeScript", "Redux", "Performance"]
-//     },
-//     {
-//         id: 3,
-//         title: "Node.js Microservices",
-//         description: "Building scalable microservice architectures",
-//         fullDescription: "Mastered microservices architecture using Node.js, including service design patterns, inter-service communication, and deployment strategies.",
-//         image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-//         category: "Backend",
-//         issuer: "Linux Foundation",
-//         date: "2023",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "LF-NODE-2023-CD456E",
-//         skills: ["Node.js", "Express", "Microservices", "Docker"]
-//     },
-//     {
-//         id: 4,
-//         title: "Machine Learning Specialization",
-//         description: "Deep learning and neural network fundamentals",
-//         fullDescription: "Comprehensive machine learning certification covering supervised and unsupervised learning, neural networks, and real-world ML applications.",
-//         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
-//         category: "AI/ML",
-//         issuer: "Stanford University",
-//         date: "2023",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "STAN-ML-2023-EF789G",
-//         skills: ["Python", "TensorFlow", "Neural Networks", "AI"]
-//     },
-//     {
-//         id: 5,
-//         title: "Docker & Kubernetes Mastery",
-//         description: "Container orchestration and deployment",
-//         fullDescription: "Advanced certification in container technologies, orchestration with Kubernetes, and cloud-native application deployment.",
-//         image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=800&q=80",
-//         category: "DevOps",
-//         issuer: "Cloud Native Computing Foundation",
-//         date: "2023",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "CNCF-K8S-2023-GH012I",
-//         skills: ["Docker", "Kubernetes", "DevOps", "CI/CD"]
-//     },
-//     {
-//         id: 6,
-//         title: "Cybersecurity Fundamentals",
-//         description: "Network security and ethical hacking basics",
-//         fullDescription: "Foundational cybersecurity certification covering network security, ethical hacking, threat detection, and security best practices.",
-//         image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
-//         category: "Security",
-//         issuer: "CompTIA",
-//         date: "2024",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "COMPTIA-SEC-2024-IJ345K",
-//         skills: ["Security", "Network", "Ethical Hacking", "Compliance"]
-//     },
-//     {
-//         id: 7,
-//         title: "GraphQL API Development",
-//         description: "Modern API design and implementation",
-//         fullDescription: "Specialized certification in GraphQL API design, schema development, and building high-performance APIs.",
-//         image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-//         category: "Backend",
-//         issuer: "Apollo GraphQL",
-//         date: "2023",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "APOLLO-GQL-2023-KL678M",
-//         skills: ["GraphQL", "API Design", "Apollo", "Schema"]
-//     },
-//     {
-//         id: 8,
-//         title: "UI/UX Design Principles",
-//         description: "User-centered design and interface optimization",
-//         fullDescription: "Comprehensive UX certification covering user research, design thinking, prototyping, and interface optimization.",
-//         image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
-//         category: "Design",
-//         issuer: "Nielsen Norman Group",
-//         date: "2024",
-//         credentialUrl: "#",
-//         previewUrl: "#",
-//         credentialId: "NNG-UX-2024-MN901O",
-//         skills: ["UX Design", "Figma", "User Research", "Prototyping"]
-//     }
-// ];
-
-// const categories = ["All", "Frontend", "Backend", "Cloud", "AI/ML", "DevOps", "Security", "Design"];
-
-// // Certificate Preview Modal Component (Based on reference design)
-// const CertificateModal = ({ certificate, onClose }: { certificate: Certificate | null; onClose: () => void }) => {
-//     if (!certificate) return null;
-
-//     const getCategoryColor = (category: string) => {
-//         const colors = {
-//             Frontend: "bg-cyan-500/20 text-cyan-400",
-//             Backend: "bg-violet-500/20 text-violet-400",
-//             Cloud: "bg-sky-500/20 text-sky-400",
-//             "AI/ML": "bg-emerald-500/20 text-emerald-400",
-//             Security: "bg-rose-500/20 text-rose-400",
-//             Design: "bg-pink-500/20 text-pink-400",
-//             "Python/SQL": "bg-blue-500/20 text-blue-400",
-//             FullStack: "bg-purple-500/20 text-purple-400",
-//         };
-//         return colors[category as keyof typeof colors] || "bg-gray-500/20 text-gray-400";
-//     };
-
-//     return (
-//         <div className="fixed inset-0 z-50 flex items-center justify-center">
-//             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
-//             <div className="relative bg-slate-900/95 backdrop-blur-sm border border-white/10 rounded-lg max-w-[95vw] sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl xl:max-w-6xl max-h-[90vh] overflow-y-auto">
-//                 <button
-//                     onClick={onClose}
-//                     className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
-//                 >
-//                     <X className="w-6 h-6" />
-//                 </button>
-
-//                 <div className="p-6 sm:p-8 md:p-10 lg:p-12">
-//                     <div className="mb-6 sm:mb-8">
-//                         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent">
-//                             Certificate Details
-//                         </h2>
-//                     </div>
-
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-//                         {/* Certificate Image */}
-//                         <div className="space-y-4 sm:space-y-6 md:space-y-8">
-//                             <div className="relative group">
-//                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-violet-500/20 rounded-lg sm:rounded-xl blur-lg sm:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-//                                 <img
-//                                     src={certificate.image}
-//                                     alt={certificate.title}
-//                                     className="relative w-full rounded-lg sm:rounded-xl border border-white/10 group-hover:scale-105 transition-transform duration-500"
-//                                 />
-//                             </div>
-
-//                             {/* Modal Action Buttons */}
-//                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-//                                 <button
-//                                     className="h-12 sm:h-14 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white rounded-lg font-medium transition-all duration-300 hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
-//                                     onClick={() => window.open(certificate.credentialUrl, "_blank")}
-//                                 >
-//                                     <ExternalLink className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-//                                     View
-//                                 </button>
-//                                 <button
-//                                     className="h-12 sm:h-14 border border-white/20 text-white hover:bg-white/5 bg-white/5 rounded-lg font-medium transition-all duration-300 hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
-//                                 >
-//                                     <Download className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-//                                     Download
-//                                 </button>
-//                                 <button
-//                                     className="h-12 sm:h-14 border border-white/20 text-white hover:bg-white/5 bg-white/5 rounded-lg font-medium transition-all duration-300 hover:scale-105 inline-flex items-center justify-center text-sm sm:text-base"
-//                                 >
-//                                     <Share2 className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-//                                     Share
-//                                 </button>
-//                             </div>
-//                         </div>
-
-//                         {/* Certificate Info */}
-//                         <div className="space-y-4 sm:space-y-6 md:space-y-8">
-//                             <div>
-//                                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-//                                     {certificate.title}
-//                                 </h3>
-//                                 <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
-//                                     {certificate.fullDescription || certificate.description}
-//                                 </p>
-//                             </div>
-
-//                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-//                                 <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/10">
-//                                     <label className="text-xs sm:text-sm text-purple-400 uppercase tracking-wide font-semibold">
-//                                         Issuer
-//                                     </label>
-//                                     <p className="text-white font-bold text-sm sm:text-base md:text-lg">{certificate.issuer}</p>
-//                                 </div>
-//                                 <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/10">
-//                                     <label className="text-xs sm:text-sm text-violet-400 uppercase tracking-wide font-semibold">
-//                                         Date
-//                                     </label>
-//                                     <p className="text-white font-bold text-sm sm:text-base md:text-lg">{certificate.date}</p>
-//                                 </div>
-//                             </div>
-
-//                             <div className="bg-white/5 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/10">
-//                                 <label className="text-xs sm:text-sm text-violet-400 uppercase tracking-wide font-semibold mb-2 block">
-//                                     Category
-//                                 </label>
-//                                 <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(certificate.category)}`}>
-//                                     {certificate.category}
-//                                 </span>
-//                             </div>
-
-//                             {certificate.credentialId && (
-//                                 <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-white/10">
-//                                     <label className="text-xs sm:text-sm text-purple-400 uppercase tracking-wide mb-3 block font-semibold">
-//                                         Credential ID
-//                                     </label>
-//                                     <code className="bg-black/30 border border-purple-500/30 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-purple-300 font-mono text-xs sm:text-sm block break-all">
-//                                         {certificate.credentialId}
-//                                     </code>
-//                                 </div>
-//                             )}
-
-//                             <div>
-//                                 <label className="text-xs sm:text-sm text-violet-400 uppercase tracking-wide mb-3 sm:mb-4 block font-semibold">
-//                                     Skills & Technologies
-//                                 </label>
-//                                 <div className="flex flex-wrap gap-2 sm:gap-3">
-//                                     {certificate.skills && certificate.skills.map((skill, index) => (
-//                                         <span
-//                                             key={index}
-//                                             className="bg-gradient-to-r from-purple-500/20 to-violet-500/20 text-purple-300 border border-purple-500/30 px-2 sm:px-3 py-1 sm:py-2 hover:scale-105 transition-transform duration-300 text-xs sm:text-sm rounded-full inline-flex items-center"
-//                                         >
-//                                             ✦ {skill}
-//                                         </span>
-//                                     ))}
-//                                 </div>
-//                             </div>
-
-//                             <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-lg sm:rounded-xl">
-//                                 <CheckCircle2 className="w-5 sm:w-6 h-5 sm:h-6 text-green-400 flex-shrink-0" />
-//                                 <span className="text-green-300 font-medium sm:font-semibold text-sm sm:text-base md:text-lg">
-//                                     Verified Certificate
-//                                 </span>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// const Certificates = () => {
-//     const [activeFilter, setActiveFilter] = useState("All");
-//     const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
-
-//     // Filter certificates based on active category
-//     const filteredCertificates = activeFilter === "All"
-//         ? certificatesData
-//         : certificatesData.filter(cert => cert.category === activeFilter);
-
-//     return (
-//         <section className="section-container relative min-h-screen pt-32 pb-0">
-//             {/* Decorative Background Elements */}
-//             <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" />
-//             <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
-
-//             {/* Section Header */}
-//             <motion.div
-//                 initial={{ opacity: 0, y: 20 }}
-//                 whileInView={{ opacity: 1, y: 0 }}
-//                 transition={{ duration: 0.6 }}
-//                 viewport={{ once: true }}
-//                 className="text-center mb-4 relative z-10"
-//             >
-//                 <h2 className="text-5xl md:text-6xl font-bold text-white mb-2 relative">
-//                     Professional
-//                     <span className="block mt-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 text-transparent bg-clip-text">
-//                         Certifications
-//                     </span>
-//                 </h2>
-
-//                 <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-//                     Industry-recognized credentials demonstrating expertise across
-//                     <span className="text-purple-400 font-semibold"> cutting-edge technologies</span>
-//                 </p>
-//             </motion.div>
-
-//             {/* Category Filters */}
-//             <motion.div
-//                 initial={{ opacity: 0, y: 20 }}
-//                 whileInView={{ opacity: 1, y: 0 }}
-//                 transition={{ duration: 0.6, delay: 0.2 }}
-//                 viewport={{ once: true }}
-//                 className="relative mb-20"
-//             >
-//                 <div className="max-w-4xl mx-auto relative">
-//                     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-blue-500/5 rounded-2xl blur-xl" />
-
-//                     <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/10 shadow-2xl">
-//                         <div className="flex flex-wrap justify-center gap-2">
-//                             {categories.map((category, index) => (
-//                                 <motion.button
-//                                     key={category}
-//                                     initial={{ opacity: 0, scale: 0.8 }}
-//                                     whileInView={{ opacity: 1, scale: 1 }}
-//                                     whileHover={{ scale: 1.05 }}
-//                                     whileTap={{ scale: 0.95 }}
-//                                     transition={{ duration: 0.2, delay: index * 0.03 }}
-//                                     viewport={{ once: true }}
-//                                     onClick={() => setActiveFilter(category)}
-//                                     className={`
-//                     relative px-6 py-3 rounded-xl font-semibold text-sm
-//                     transition-all duration-300 overflow-hidden
-//                     ${activeFilter === category
-//                                             ? 'text-white shadow-lg'
-//                                             : 'text-gray-400 hover:text-white'
-//                                         }
-//                   `}
-//                                 >
-//                                     {activeFilter === category && (
-//                                         <motion.div
-//                                             layoutId="activeFilterBg"
-//                                             className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500"
-//                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-//                                         />
-//                                     )}
-
-//                                     {activeFilter !== category && (
-//                                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-blue-500/0 hover:from-purple-500/10 hover:via-pink-500/10 hover:to-blue-500/10 transition-all duration-300" />
-//                                     )}
-
-//                                     <span className="relative z-10 flex items-center gap-2">
-//                                         {category}
-//                                     </span>
-//                                 </motion.button>
-//                             ))}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </motion.div>
-
-//             {/* Certificates Grid */}
-//             <AnimatePresence mode="wait">
-//                 <motion.div
-//                     key={activeFilter}
-//                     initial={{ opacity: 0, y: 20 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     exit={{ opacity: 0, y: -20 }}
-//                     transition={{ duration: 0.4 }}
-//                     className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10"
-//                 >
-//                     {filteredCertificates.map((certificate, index) => (
-//                         <motion.div
-//                             key={certificate.id}
-//                             initial={{ opacity: 0, x: -50, rotateY: -15 }}
-//                             whileInView={{
-//                                 opacity: 1,
-//                                 x: 0,
-//                                 rotateY: 0,
-//                                 transition: {
-//                                     type: "spring",
-//                                     bounce: 0.3,
-//                                     duration: 0.8,
-//                                     delay: index * 0.1
-//                                 }
-//                             }}
-//                             viewport={{ once: true, amount: 0.2 }}
-//                             className="group relative"
-//                             style={{ perspective: "1000px" }}
-//                         >
-//                             <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-3xl opacity-0 group-hover:opacity-75 blur-xl transition-all duration-500 group-hover:duration-200" />
-
-//                             <Card className="premium-certificate-card relative h-full overflow-hidden bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 border-white/10 rounded-3xl transition-all duration-500 hover:border-purple-500/30 backdrop-blur-xl">
-//                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-//                                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5" />
-//                                 </div>
-
-//                                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-//                                 </div>
-
-//                                 <div className="relative h-64 overflow-hidden">
-//                                     <img
-//                                         src={certificate.image}
-//                                         alt={certificate.title}
-//                                         className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-//                                     />
-
-//                                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent" />
-//                                     <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-//                                     <div className="absolute top-4 right-4">
-//                                         <div className="relative">
-//                                             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 blur-md opacity-75" />
-//                                             <div className="relative px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20">
-//                                                 <span className="text-xs font-bold bg-gradient-to-r from-purple-300 to-pink-300 text-transparent bg-clip-text">
-//                                                     {certificate.category}
-//                                                 </span>
-//                                             </div>
-//                                         </div>
-//                                     </div>
-
-//                                     <div className="absolute top-0 left-0 w-20 h-20">
-//                                         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-500/20 to-transparent rounded-br-full" />
-//                                     </div>
-//                                 </div>
-
-//                                 <CardHeader className="relative pb-4 pt-6">
-//                                     <CardTitle className="text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 group-hover:bg-clip-text transition-all duration-300 leading-tight">
-//                                         {certificate.title}
-//                                     </CardTitle>
-
-//                                     <div className="flex flex-col gap-2 mt-4">
-//                                         <div className="flex items-center gap-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
-//                                             <Building2 className="w-4 h-4 text-purple-400" />
-//                                             <span className="font-medium">{certificate.issuer}</span>
-//                                         </div>
-//                                         <div className="flex items-center gap-2 text-sm text-gray-500">
-//                                             <Calendar className="w-4 h-4 text-blue-400" />
-//                                             <span>{certificate.date}</span>
-//                                         </div>
-//                                     </div>
-//                                 </CardHeader>
-
-//                                 <CardContent className="pb-6">
-//                                     <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-//                                         {certificate.description}
-//                                     </p>
-//                                 </CardContent>
-
-//                                 <CardFooter className="flex gap-3 pt-2 pb-6">
-//                                     {certificate.credentialUrl && (
-//                                         <Button
-//                                             asChild
-//                                             className="flex-1 relative overflow-hidden bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-purple-500/50 group/btn border-0"
-//                                         >
-//                                             <a href={certificate.credentialUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-//                                                 <ExternalLink className="w-4 h-4 group-hover/btn:rotate-45 transition-transform duration-300" />
-//                                                 <span className="font-semibold">View Credential</span>
-//                                             </a>
-//                                         </Button>
-//                                     )}
-
-//                                     <Button
-//                                         onClick={() => setSelectedCertificate(certificate)}
-//                                         variant="outline"
-//                                         className="flex-1 relative overflow-hidden border-purple-500/30 bg-purple-500/5 hover:bg-purple-500/10 text-purple-300 hover:text-purple-200 hover:border-purple-400/50 rounded-xl transition-all duration-300 backdrop-blur-sm group/btn"
-//                                     >
-//                                         <Eye className="w-4 h-4 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
-//                                         <span className="font-semibold">Preview</span>
-//                                     </Button>
-//                                 </CardFooter>
-
-//                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-//                             </Card>
-//                         </motion.div>
-//                     ))}
-//                 </motion.div>
-//             </AnimatePresence>
-
-//             {/* Empty state */}
-//             {filteredCertificates.length === 0 && (
-//                 <motion.div
-//                     initial={{ opacity: 0, scale: 0.9 }}
-//                     animate={{ opacity: 1, scale: 1 }}
-//                     className="text-center py-32"
-//                 >
-//                     <div className="relative inline-block">
-//                         <Award className="w-24 h-24 text-gray-700 mx-auto mb-6" />
-//                         <div className="absolute inset-0 bg-purple-500/10 blur-2xl rounded-full" />
-//                     </div>
-//                     <p className="text-gray-500 text-xl font-medium">No certificates found in this category</p>
-//                     <p className="text-gray-600 text-sm mt-2">Try selecting a different category</p>
-//                 </motion.div>
-//             )}
-
-//             {/* Certificate Preview Modal */}
-//             <AnimatePresence>
-//                 {selectedCertificate && (
-//                     <CertificateModal
-//                         certificate={selectedCertificate}
-//                         onClose={() => setSelectedCertificate(null)}
-//                     />
-//                 )}
-//             </AnimatePresence>
-//         </section>
-//     );
-// };
-
-// export default Certificates;
-
-
-
-
-
-
-
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -548,25 +14,14 @@ import {
     CheckCircle,
     Zap,
     X,
+    Star,
+    Code2,
+    Award,
+    Users,
+    GraduationCap,
+    MapPin,
+    Monitor,
 } from "lucide-react"
-import { VortexBackground } from "@/components/ui/vortex-background"
-import azureCertImg from "../assets/CertificateOfCompletion_AzureAI.png"
-import sheKunjCert from "../assets/Shekunj AI Course Certificate-1.png"
-import documentDBCert from "../assets/Amazon DocumentDB Certificate-1.png"
-import azureFundamentCert from "../assets/Azure Fundamentals Certificate-1.png"
-import azureWorkscert from "../assets/Azure Fundamentals Workshop Certificate-1.png"
-import basicAzurecert from "../assets/Basics Of Azure Services-1.png"
-import containerSecCert from "../assets/Dive Deep on Container Security-1.png"
-import gatewayLoadCert from "../assets/GateWay Load Balancer Certificate-1.png"
-import githubCoCert from "../assets/GitHub Copilot By SimpliLearn-1.png"
-import cssCert from "../assets/HackerRank CSS Certificate-1.png"
-import frontendDevCert from "../assets/HackerRank Frontend Devloper React Certificate-1.png"
-import javascriptBasicCert from "../assets/HackerRank Javascript Certificate-1.png"
-import javascriptInterCert from "../assets/HackerRank JavaScript(Intermediate) Certificate-1.png"
-import problemSolveCert from "../assets/HackerRank Problem Solving Certificate-1.png"
-import reactBasiccert from "../assets/HackerRank React (Basic) Certificate-1.png"
-import restAPIInterCert from "../assets/RestAPI Intermediate Certificate-1.png"
-import cs50Cert from "../assets/CS50x Certificate-1.png"
 
 // Sample certificate data
 const certificates = [
@@ -805,7 +260,60 @@ const certificates = [
     },
 ]
 
-const categories = ["All", "Frontend", "Full Stack", "Cloud", "AI/ML", "Security", "Design", "Backend"];
+// Hackathon data
+const hackathons = [
+    {
+        id: 101,
+        title: "Hack The Tank 3.0 2026 - Top 4 Finalist",
+        issuer: "SVNIT Surat",
+        date: "2026",
+        description:
+            "Built a next-generation reverse-commerce platform, ReturnIQ, that reimagines the return and exchange experience for modern D2C brands. The system streamlines post-purchase workflows, reduces reverse logistics and delivery costs, accelerates customer exchanges, and integrates intelligent fraud-detection mechanisms to minimize revenue leakage. By leveraging automation and data-driven decisioning, ReturnIQ transforms returns from an operational burden into a strategic growth advantage.",
+        location: "Surat, India",
+        certificateUrl: "https://www.linkedin.com/posts/kanishka-trivedi_hackthetank3-dscnitsurat-openleaf-activity-7429396395079426048-81Zr?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFVUuDcBgxMdGiH8DZwLSb1wC5NEu4mDJmY",
+        featured: true,
+    },
+    {
+        id: 102,
+        title: "InnovAItion - DAIICT Hackathon 2026",
+        issuer: "DAIICT Gandhinagar",
+        date: "2026",
+        description:
+            "Developed a visual cloud infrastructure builder that enables users to design and deploy cloud architectures without prior cloud expertise. Built a drag-and-drop canvas interface where users can visually compose cloud services, while the platform automatically generates production-ready Terraform code in the background. The system abstracts infrastructure complexity, accelerates deployment workflows, and bridges the gap between visual design and Infrastructure as Code (IaC) automation.",
+        location: "Gandhinagar, India",
+        certificateUrl: "https://unstop.com/certificate-preview/9bbf6bf7-3c31-40bd-928e-7d3897a734e6",
+        featured: true,
+    },
+        {
+        id: 103,
+        title: "Synapse - Symbiosis University Hackathon 2026",
+        issuer: "Symbiosis University Pune",
+        date: "2026",
+        location: "Pune, India",
+        certificateUrl: "https://drive.google.com/file/d/19AW2EeG-YEUs9mW-e2_otj6Ekdgy9Fkx/view?usp=sharing",
+        featured: true,
+    },
+];
+
+const filterTabs = [
+    { key: "Hackathons", label: "Hackathons", icon: Code2, color: "#00d4ff" },
+    { key: "Certifications", label: "Certifications", icon: Award, color: "#a1a1aa" },
+    { key: "Workshops", label: "Workshops", icon: Users, color: "#d4a017" },
+];
+
+// Workshop data
+const workshops = [
+    {
+        id: 201,
+        title: "Industrial Visit - Odoo",
+        issuer: "Odoo India Pvt. Ltd.",
+        date: "2024",
+        description:
+            "Gained insights into ERP software development and enterprise solutions.",
+        location: "Gandhinagar, Gujarat",
+        certificateUrl: "#",
+    },
+];
 
 // Custom Card Component
 function Card({ children, className, ...props }) {
@@ -876,14 +384,28 @@ function Modal({ isOpen, onClose, children }) {
 }
 
 export default function Certificates() {
-    const [searchTerm, setSearchTerm] = useState("")
-    const [selectedCategory, setSelectedCategory] = useState("All")
-    const [filteredCertificates, setFilteredCertificates] = useState(certificates)
+    const [activeFilter, setActiveFilter] = useState<string | null>(null)
     const [selectedCertificate, setSelectedCertificate] = useState(null)
     const [isVisible, setIsVisible] = useState(true)
-    const [hoveredCard, setHoveredCard] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const sectionRef = useRef(null)
+    const certificationsRef = useRef<HTMLDivElement>(null)
+    const hackathonsRef = useRef<HTMLDivElement>(null)
+    const workshopsRef = useRef<HTMLDivElement>(null)
+
+    const sectionRefs: Record<string, React.RefObject<HTMLDivElement | null>> = {
+        Certifications: certificationsRef,
+        Hackathons: hackathonsRef,
+        Workshops: workshopsRef,
+    }
+
+    const handleFilterClick = (key: string) => {
+        setActiveFilter(key)
+        const ref = sectionRefs[key]
+        if (ref?.current) {
+            ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }
 
     // Intersection Observer for animations
     useEffect(() => {
@@ -903,26 +425,6 @@ export default function Certificates() {
         return () => observer.disconnect()
     }, [])
 
-    // Filter certificates
-    useEffect(() => {
-        let filtered = certificates
-
-        if (searchTerm) {
-            filtered = filtered.filter(
-                (cert) =>
-                    cert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    cert.issuer.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    cert.skills.some((skill) => skill.toLowerCase().includes(searchTerm.toLowerCase())),
-            )
-        }
-
-        if (selectedCategory !== "All") {
-            filtered = filtered.filter((cert) => cert.category === selectedCategory)
-        }
-
-        setFilteredCertificates(filtered)
-    }, [searchTerm, selectedCategory])
-
     const getCategoryColor = (category) => {
         const colors = {
             Frontend: "bg-cyan-500/20 text-cyan-400",
@@ -931,8 +433,29 @@ export default function Certificates() {
             "AI/ML": "bg-emerald-500/20 text-emerald-400",
             Security: "bg-rose-500/20 text-rose-400",
             Design: "bg-pink-500/20 text-pink-400",
+            Backend: "bg-orange-500/20 text-orange-400",
+            FullStack: "bg-violet-500/20 text-violet-400",
+            "AI/Ml": "bg-emerald-500/20 text-emerald-400",
+            "Python/SQL": "bg-yellow-500/20 text-yellow-400",
         }
         return colors[category] || "bg-gray-500/20 text-gray-400"
+    }
+
+    // Theme color system matching the project cards
+    const getCategoryTheme = (category) => {
+        const themes = {
+            Frontend: { color: '#6366f1', bg: 'bg-[#6366f125]' },
+            "Full Stack": { color: '#10b981', bg: 'bg-[#10b98125]' },
+            FullStack: { color: '#10b981', bg: 'bg-[#10b98125]' },
+            Cloud: { color: '#0ea5e9', bg: 'bg-[#0ea5e925]' },
+            "AI/ML": { color: '#10b981', bg: 'bg-[#10b98125]' },
+            "AI/Ml": { color: '#10b981', bg: 'bg-[#10b98125]' },
+            Security: { color: '#ec4899', bg: 'bg-[#ec489925]' },
+            Design: { color: '#f43f5e', bg: 'bg-[#f43f5e25]' },
+            Backend: { color: '#ec4899', bg: 'bg-[#ec489925]' },
+            "Python/SQL": { color: '#eab308', bg: 'bg-[#eab30825]' },
+        }
+        return themes[category] || { color: '#8b5cf6', bg: 'bg-[#8b5cf625]' }
     }
 
     const openModal = (cert) => {
@@ -954,90 +477,95 @@ export default function Certificates() {
                 paddingTop: "80px", // Add space for fixed navbar
             }}
         >
-      {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }}
-        />
-        <motion.div
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
-        />
-      </div>
+            {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
+            <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 opacity-[0.15]"
+                    style={{
+                        backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
+                        backgroundSize: '40px 40px'
+                    }}
+                />
+                <motion.div
+                    animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
+                />
+                <motion.div
+                    animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
+                />
+            </div>
 
             {/* Main Content */}
             <div className="relative z-20 px-3 sm:px-4 md:px-6 lg:px-8 pb-16">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
-                    <div
-                        className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-                    >
-                        <h1 className="text-3xl sm:text-4xl md:text-3xl lg:text-3xl xl:text-4xl font-black bg-gradient-to-r from-white via-purple-200 to-violet-200 bg-clip-text text-transparent mb-4 sm:mb-6 md:mb-8 leading-tight px-2">
-                            My Certifications
-                        </h1>
+                    <div className="text-center mb-16">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-6xl md:text-[5.5rem] font-bold tracking-tighter leading-[1.05] mb-8"
+                        >
+                            Earned with<br />
+                            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#9478ff] to-[#f244ff] pr-4">
+                                Dedication
+                            </span>
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-[#949494] mt-8 max-w-xl mx-auto text-lg font-normal leading-relaxed"
+                        >
+                            Every hackathon, certificate, and workshop here marks a milestone — built through curiosity, late nights, and a drive to never stop growing.
+                        </motion.p>
 
-                        <div className="relative px-4">
-                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 md:mb-8">
-                                These certifications tell the story of my learning journey—one step at a time, growing with every course and challenge in tech.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Search and Category Filter */}
-                    <div
-                        className={`mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-                    >
-                        <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
-                            {/* Search */}
-                            <div className="relative w-full max-w-2xl mx-auto">
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-violet-500/20 rounded-xl sm:rounded-2xl blur-lg sm:blur-xl"></div>
-                                <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-1">
-                                    <div className="relative">
-                                        <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-purple-400 w-4 sm:w-5 h-4 sm:h-5" />
-                                        <Input
-                                            placeholder="Search certificates, skills, or issuers..."
-                                            value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-4 bg-transparent border-0 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500/50 text-sm sm:text-base md:text-lg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Category Filter */}
-                            <div className="relative w-full max-w-md mx-auto">
-                                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-violet-500/10 rounded-lg sm:rounded-xl blur-sm sm:blur-lg"></div>
-                                <div className="relative flex items-center gap-2 sm:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2.5 sm:py-3">
-                                    <Filter className="w-3 sm:w-4 h-3 sm:h-4 text-purple-400 flex-shrink-0" />
-                                    <select
-                                        value={selectedCategory}
-                                        onChange={(e) => setSelectedCategory(e.target.value)}
-                                        className="bg-transparent text-white focus:outline-none cursor-pointer text-sm sm:text-base w-full"
+                        {/* Filter Tabs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="flex flex-wrap justify-center gap-3 mt-10"
+                        >
+                            {filterTabs.map((tab) => {
+                                const isActive = activeFilter === tab.key;
+                                const Icon = tab.icon;
+                                return (
+                                    <button
+                                        key={tab.key}
+                                        onClick={() => handleFilterClick(tab.key)}
+                                        className={`
+                                            inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium
+                                            transition-all duration-300 border cursor-pointer
+                                            ${isActive
+                                                ? ''
+                                                : 'border-[#2a2a2a] bg-[#141414] text-[#888] hover:text-white hover:border-[#444]'
+                                            }
+                                        `}
+                                        style={isActive ? { color: tab.color, borderColor: tab.color, backgroundColor: `${tab.color}15` } : {}}
                                     >
-                                        {categories.map((category) => (
-                                            <option key={category} value={category} className="bg-slate-800">
-                                                {category}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                                        <Icon className="w-4 h-4" />
+                                        {tab.label}
+                                    </button>
+                                );
+                            })}
+                        </motion.div>
                     </div>
 
-                    {/* Certificates Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-y-10 gap-x-2 sm:gap-x-4 md:gap-x-6 lg:gap-x-[0px]">
-                        {filteredCertificates.map((cert, index) => {
-                            const isLeftColumn = index % 2 === 0;
+                    {/* Certifications Grid */}
+                    <div ref={certificationsRef} className="scroll-mt-24 mb-20">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-3xl md:text-4xl font-bold text-white mb-10 text-center"
+                        >
+                            Certifications
+                        </motion.h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {certificates.map((cert, index) => {
+                            const theme = getCategoryTheme(cert.category);
                             const cardRef = useRef(null);
                             const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
@@ -1045,177 +573,285 @@ export default function Certificates() {
                                 <motion.div
                                     key={cert.id}
                                     ref={cardRef}
-                                    initial={{
-                                        opacity: 0,
-                                        x: isLeftColumn ? -100 : 100,
-                                        y: -80,
-                                    }}
-                                    animate={isInView ? {
-                                        opacity: 1,
-                                        x: 0,
-                                        y: 0,
-                                    } : {}}
-                                    transition={{
-                                        duration: 0.8,
-                                        delay: Math.floor(index / 2) * 0.2,
-                                        ease: [0.25, 0.46, 0.45, 0.94],
-                                    }}
-                                    className="max-w-[550px] w-full mx-auto"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                                    transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
+                                    className="group relative bg-[#09090b] border border-[#1a1a1a] rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_-10px_rgba(0,0,0,0.5)]"
                                 >
-                                    <Card
-                                        className="group relative bg-white/5 backdrop-blur-sm border-white/10 hover:border-purple-500/30 transition-all duration-700 cursor-pointer overflow-hidden"
+                                    {/* Hover Gradient Border Effect */}
+                                    <div
+                                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem] z-20"
                                         style={{
-                                            transformStyle: "preserve-3d",
+                                            border: `2px solid ${theme.color}`,
+                                            maskImage: 'linear-gradient(to bottom, black, transparent)',
+                                            WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)'
                                         }}
-                                        onMouseEnter={() => setHoveredCard(cert.id)}
-                                        onMouseLeave={() => setHoveredCard(null)}
-                                    >
-                                        {/* Glow Effect */}
-                                        <div
-                                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg blur-xl"
-                                            style={{
-                                                background: `linear-gradient(45deg, ${cert.color}20, ${cert.color}40)`,
-                                                transform: "translateZ(-10px)",
-                                            }}
-                                        ></div>
+                                    />
 
-                                        {/* Hover Shadow */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-transparent to-violet-500/0 group-hover:from-purple-500/10 group-hover:to-violet-500/10 transition-all duration-500 rounded-lg"></div>
+                                    {/* Image Section */}
+                                    <div className="relative aspect-[1.4/1] m-2 overflow-hidden rounded-[1.6rem] z-10">
+                                        <img
+                                            src={cert.image || "/placeholder.svg"}
+                                            alt={cert.title}
+                                            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                                        />
 
-                                        <div className="p-0 relative">
-                                            {/* Certificate Image */}
-                                            <div className="relative overflow-hidden">
-                                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-violet-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-                                                <img
-                                                    src={cert.image || "/placeholder.svg"}
-                                                    alt={cert.title}
-                                                    className="w-full h-48 sm:h-52 md:h-56 lg:h-60 object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
-                                                    style={{
-                                                        filter: hoveredCard === cert.id ? "saturate(1.2) contrast(1.1)" : "saturate(1) contrast(1)",
-                                                    }}
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                                        {/* Darkened Overlay on Hover */}
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                                {/* Verification Badge */}
-                                                {cert.verified && (
-                                                    <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4 bg-green-500/20 backdrop-blur-sm border border-green-500/30 rounded-full p-1.5 sm:p-2 md:p-3 group-hover:scale-110 transition-transform duration-300">
-                                                        <CheckCircle className="w-3 sm:w-4 md:w-5 h-3 sm:h-4 md:h-5 text-green-400" />
-                                                        <div className="absolute inset-0 bg-green-400/20 rounded-full animate-ping"></div>
-                                                    </div>
-                                                )}
+                                        {/* Emerging Action Buttons on Hover */}
+                                        <div className="absolute inset-0 flex items-center justify-center gap-6">
+                                            <motion.button
+                                                whileHover={{ scale: 1.1 }}
+                                                whileTap={{ scale: 0.9 }}
+                                                onClick={() => openModal(cert)}
+                                                className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75 p-4 bg-[#212121] text-white rounded-full shadow-2xl"
+                                            >
+                                                <Eye size={28} />
+                                            </motion.button>
 
-                                                {/* Animated Elements */}
-                                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                                                    <div className="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 border-2 border-white/30 rounded-full animate-spin-slow"></div>
-                                                    <div className="absolute inset-1 sm:inset-2 border border-purple-400/50 rounded-full animate-pulse"></div>
-                                                </div>
-                                            </div>
-
-                                            {/* Certificate Content */}
-                                            <div className="p-4 sm:p-6 md:p-8 relative">
-                                                {/* Animated Particles */}
-                                                <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="absolute w-1 h-1 bg-purple-400/30 rounded-full animate-float opacity-0 group-hover:opacity-100"
-                                                            style={{
-                                                                left: `${20 + i * 15}%`,
-                                                                animationDelay: `${i * 0.2}s`,
-                                                                animationDuration: "3s",
-                                                            }}
-                                                        ></div>
-                                                    ))}
-                                                </div>
-
-                                                <div className="flex items-start justify-between mb-3 sm:mb-4">
-                                                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-white group-hover:text-purple-300 transition-colors line-clamp-2 leading-tight">
-                                                        {cert.title}
-                                                    </h3>
-                                                </div>
-
-                                                <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                                                    <div className="p-1.5 sm:p-2 bg-white/5 rounded-lg">
-                                                        <Building className="w-3 sm:w-4 h-3 sm:h-4 text-purple-400" />
-                                                    </div>
-                                                    <span className="text-gray-300 font-medium sm:font-semibold text-sm sm:text-base">
-                                                        {cert.issuer}
-                                                    </span>
-                                                </div>
-
-                                                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                                                    <div className="p-1.5 sm:p-2 bg-white/5 rounded-lg">
-                                                        <Calendar className="w-3 sm:w-4 h-3 sm:h-4 text-violet-400" />
-                                                    </div>
-                                                    <span className="text-gray-400 text-sm sm:text-base">{cert.date}</span>
-                                                </div>
-
-                                                {/* Category Badge */}
-                                                <Badge
-                                                    className={`${getCategoryColor(cert.category)} mb-4 sm:mb-6 px-2 sm:px-3 py-0.5 sm:py-1 group-hover:scale-105 transition-transform duration-300 text-xs sm:text-sm`}
-                                                >
-                                                    {cert.category}
-                                                </Badge>
-
-                                                {/* Skills */}
-                                                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
-                                                    {cert.skills.slice(0, 3).map((skill, skillIndex) => (
-                                                        <span
-                                                            key={skillIndex}
-                                                            className="text-xs bg-gradient-to-r from-white/10 to-white/5 text-gray-300 px-2 sm:px-3 py-1 sm:py-2 rounded-full border border-white/10 hover:border-purple-500/30 transition-colors duration-300"
-                                                        >
-                                                            {skill}
-                                                        </span>
-                                                    ))}
-                                                    {cert.skills.length > 3 && (
-                                                        <span className="text-xs bg-gradient-to-r from-purple-500/20 to-violet-500/20 text-purple-300 px-2 sm:px-3 py-1 sm:py-2 rounded-full border border-purple-500/30">
-                                                            +{cert.skills.length - 3} more
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Action Buttons */}
-                                                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                                                    <Button
-                                                        variant="outline"
-                                                        size="lg"
-                                                        className="flex-1 h-10 sm:h-12 hover:scale-105 transition-all duration-300 text-sm sm:text-base font-medium sm:font-semibold"
-                                                        onClick={() => openModal(cert)}
-                                                    >
-                                                        <Eye className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                                                        Preview
-                                                    </Button>
-
-                                                    <Button
-                                                        size="lg"
-                                                        className="flex-1 h-10 sm:h-12 hover:scale-105 transition-all duration-300 text-sm sm:text-base font-medium sm:font-semibold"
-                                                        onClick={() => window.open(cert.certificateUrl, "_blank")}
-                                                    >
-                                                        <ExternalLink className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                                                        View Certificate
-                                                    </Button>
-                                                </div>
-                                            </div>
+                                            <motion.button
+                                                whileHover={{ scale: 1.1 }}
+                                                whileTap={{ scale: 0.9 }}
+                                                onClick={() => window.open(cert.certificateUrl, "_blank")}
+                                                className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 p-4 bg-gradient-to-br from-[#8b5cf6] to-[#a855f7] text-white rounded-full shadow-2xl"
+                                            >
+                                                <ExternalLink size={28} />
+                                            </motion.button>
                                         </div>
-                                    </Card>
+
+                                        {/* Year Badge */}
+                                        <div className="absolute top-4 right-4 bg-[#00000080] backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold text-[#d1d1d1] border border-white/10">
+                                            {cert.date}
+                                        </div>
+
+                                        {/* Verified Badge */}
+                                        {cert.verified && (
+                                            <div className="absolute top-4 left-4 bg-[#00000080] backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-bold text-green-400 border border-green-500/20 flex items-center gap-1.5">
+                                                <CheckCircle size={12} />
+                                                Verified
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Card Body */}
+                                    <div className="p-8 pt-4 relative z-10">
+                                        {/* Category Badge */}
+                                        <span
+                                            className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md mb-4 inline-block ${theme.bg}`}
+                                            style={{ color: theme.color }}
+                                        >
+                                            {cert.category}
+                                        </span>
+
+                                        {/* Title */}
+                                        <h3 className="text-xl font-bold text-white mb-1 tracking-tight group-hover:text-[#9478ff] transition-colors line-clamp-2">
+                                            {cert.title}
+                                        </h3>
+
+                                        {/* Issuer as tagline */}
+                                        <p className="text-[13px] font-semibold mb-4" style={{ color: theme.color }}>
+                                            {cert.issuer}
+                                        </p>
+
+                                        {/* Description */}
+                                        <p className="text-[#808080] text-sm leading-relaxed mb-6 line-clamp-2">
+                                            {cert.description}
+                                        </p>
+
+                                        {/* Skills as dot-prefixed items */}
+                                        <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8">
+                                            {cert.skills.map((skill) => (
+                                                <span key={skill} className="text-[11px] text-[#555] font-medium flex items-center gap-2">
+                                                    <span className="w-1 h-1 rounded-full" style={{ backgroundColor: theme.color }} /> {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        {/* Action Buttons */}
+                                        <div className="flex gap-3">
+                                            <button
+                                                onClick={() => openModal(cert)}
+                                                className="flex-1 py-3.5 rounded-full bg-[#121212] border border-[#1a1a1a] group-hover:bg-white group-hover:text-black transition-all duration-500 flex items-center justify-center gap-2 font-bold text-sm"
+                                            >
+                                                View Details <Eye size={16} />
+                                            </button>
+                                            <button
+                                                onClick={() => window.open(cert.certificateUrl, "_blank")}
+                                                className="py-3.5 px-5 rounded-full bg-[#121212] border border-[#1a1a1a] hover:bg-gradient-to-r hover:from-[#8b5cf6] hover:to-[#a855f7] hover:border-transparent transition-all duration-500 flex items-center justify-center"
+                                            >
+                                                <ExternalLink size={16} />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom Highlight Bar on Hover */}
+                                    <div
+                                        className="absolute bottom-0 left-0 h-1 w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20"
+                                        style={{ backgroundColor: theme.color }}
+                                    />
                                 </motion.div>
                             );
                         })}
                     </div>
+                    </div>
 
-                    {/* No Results */}
-                    {
-                        filteredCertificates.length === 0 && (
-                            <div className="text-center py-12 sm:py-16 md:py-20">
-                                <div className="relative w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 bg-gradient-to-br from-white/5 to-white/10 rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8 backdrop-blur-sm border border-white/10">
-                                    <Search className="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 text-purple-400" />
-                                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-violet-500/20 rounded-full animate-pulse"></div>
-                                </div>
-                                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">No certificates found</h3>
-                                <p className="text-gray-400 text-base sm:text-lg">Try adjusting your search or filter criteria</p>
+                    {/* Hackathon Timeline */}
+                    <div ref={hackathonsRef} className="scroll-mt-24 mb-20">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-3xl md:text-4xl font-bold text-white mb-10 text-center"
+                        >
+                            Hackathon Journey
+                        </motion.h2>
+                            <div className="space-y-10 max-w-5xl mx-auto">
+                                {hackathons.map((hackathon, index) => {
+                                    const isEven = index % 2 === 0;
+                                    return (
+                                        <motion.div
+                                            key={hackathon.id}
+                                            initial={{ opacity: 0, y: 40 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true, margin: "-50px" }}
+                                            transition={{ duration: 0.6, delay: index * 0.15 }}
+                                            className={`flex items-start gap-4 md:gap-6 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                                        >
+                                            {/* Side Icon */}
+                                            <div className="flex-shrink-0 mt-8 hidden sm:block">
+                                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-dashed border-cyan-400/60 flex items-center justify-center">
+                                                    <Code2 className="w-5 h-5 md:w-6 md:h-6 text-cyan-400" />
+                                                </div>
+                                            </div>
+
+                                            {/* Hackathon Card */}
+                                            <div className="flex-1 border border-dashed border-cyan-400/40 rounded-2xl p-6 md:p-8 bg-[#0a0a0a]/80 backdrop-blur-sm relative overflow-hidden group hover:border-cyan-400/60 transition-colors duration-500">
+                                                {/* Subtle glow on hover */}
+                                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                                                {/* Top row: Year + Category + Star */}
+                                                <div className="flex items-center justify-between mb-4 relative z-10">
+                                                    <div className="flex items-center gap-3">
+                                                        <span className="bg-[#1a1a2e] text-white text-xs font-bold px-3 py-1 rounded-md border border-white/10">
+                                                            {hackathon.date}
+                                                        </span>
+                                                        <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest">
+                                                            HACKATHONS
+                                                        </span>
+                                                    </div>
+                                                    <Star className="w-6 h-6 text-amber-400 fill-amber-400" />
+                                                </div>
+
+                                                {/* Title */}
+                                                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 relative z-10">
+                                                    {hackathon.title}
+                                                </h3>
+
+                                                {/* Issuer */}
+                                                <p className="text-cyan-400 font-semibold text-sm mb-4 relative z-10">
+                                                    {hackathon.issuer}
+                                                </p>
+
+                                                {/* Description */}
+                                                <p className="text-[#808080] text-sm leading-relaxed mb-6 relative z-10">
+                                                    {hackathon.description}
+                                                </p>
+
+                                                {/* Location */}
+                                                <div className="flex items-center gap-2 text-[#808080] text-sm mb-6 relative z-10">
+                                                    <MapPin className="w-4 h-4" />
+                                                    {hackathon.location}
+                                                </div>
+
+                                                {/* View Certificate Button */}
+                                                <button
+                                                    onClick={() => window.open(hackathon.certificateUrl, "_blank")}
+                                                    className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-white/20 text-white text-sm font-medium hover:bg-white/5 transition-colors duration-300"
+                                                >
+                                                    View Certificate
+                                                    <ExternalLink className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
                             </div>
-                        )
-                    }
+                    </div>
+
+                    {/* Workshops Section */}
+                    <div ref={workshopsRef} className="scroll-mt-24 mb-20">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-3xl md:text-4xl font-bold text-white mb-10 text-center"
+                        >
+                            Workshops
+                        </motion.h2>
+                        <div className="space-y-10 max-w-5xl mx-auto">
+                            {workshops.map((workshop, index) => {
+                                const isEven = index % 2 === 0;
+                                return (
+                                    <motion.div
+                                        key={workshop.id}
+                                        initial={{ opacity: 0, y: 40 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, margin: "-50px" }}
+                                        transition={{ duration: 0.6, delay: index * 0.15 }}
+                                        className={`flex items-start gap-4 md:gap-6 ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+                                    >
+                                        {/* Side Icon */}
+                                        <div className="flex-shrink-0 mt-8 hidden sm:block">
+                                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-dashed border-purple-400/60 flex items-center justify-center">
+                                                <Monitor className="w-5 h-5 md:w-6 md:h-6 text-purple-400" />
+                                            </div>
+                                        </div>
+
+                                        {/* Workshop Card */}
+                                        <div className="flex-1 border border-dashed border-purple-400/40 rounded-2xl p-6 md:p-8 bg-[#0a0a0a]/80 backdrop-blur-sm relative overflow-hidden group hover:border-purple-400/60 transition-colors duration-500">
+                                            {/* Subtle glow on hover */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                                            {/* Top row: Year + Category + Star */}
+                                            <div className="flex items-center justify-between mb-4 relative z-10">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="bg-[#1a1a2e] text-white text-xs font-bold px-3 py-1 rounded-md border border-white/10">
+                                                        {workshop.date}
+                                                    </span>
+                                                    <span className="text-purple-400 text-xs font-bold uppercase tracking-widest">
+                                                        WORKSHOPS
+                                                    </span>
+                                                </div>
+                                                <Star className="w-6 h-6 text-amber-400 fill-amber-400" />
+                                            </div>
+
+                                            {/* Title */}
+                                            <h3 className="text-xl md:text-2xl font-bold text-white mb-1 relative z-10">
+                                                {workshop.title}
+                                            </h3>
+
+                                            {/* Issuer */}
+                                            <p className="text-purple-400 font-semibold text-sm mb-4 relative z-10">
+                                                {workshop.issuer}
+                                            </p>
+
+                                            {/* Description */}
+                                            <p className="text-[#808080] text-sm leading-relaxed mb-6 relative z-10">
+                                                {workshop.description}
+                                            </p>
+
+                                            {/* Location */}
+                                            <div className="flex items-center gap-2 text-[#808080] text-sm relative z-10">
+                                                <MapPin className="w-4 h-4" />
+                                                {workshop.location}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
 
