@@ -62,9 +62,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen, { SectionType } from "./components/LoadingScreen";
 import { useLoading } from "./hooks/useLoading";
 
 // Layout Components
@@ -92,6 +92,35 @@ const ScrollToTop = () => {
   return null;
 };
 
+const RouteLoader = () => {
+  const location = useLocation();
+  const [loadingSection, setLoadingSection] = useState<SectionType | null>(null);
+
+  // Determine which section's loader to show based on the route
+  const getSectionFromPath = (path: string): SectionType => {
+    if (path === "/") return "home";
+    if (path.includes("technologies") || path.includes("skills")) return "skills";
+    if (path.includes("certificates") || path.includes("work")) return "hallOfFame"; // Defaulting these to hallOfFame as it fits
+    if (path.includes("projects")) return "projects";
+    if (path.includes("contact")) return "contact";
+    return "home"; // fallback
+  };
+
+  useEffect(() => {
+    // Show loader on mount and route changes
+    setLoadingSection(getSectionFromPath(location.pathname));
+  }, [location.pathname]);
+
+  if (!loadingSection) return null;
+
+  return (
+    <LoadingScreen
+      section={loadingSection}
+      onComplete={() => setLoadingSection(null)}
+    />
+  );
+};
+
 const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col relative z-10">
@@ -105,9 +134,7 @@ const Layout = ({ children }) => {
 };
 
 const AppContent = () => {
-  const isLoading = useLoading(3000);
-
-  if (isLoading) return <LoadingScreen />;
+  // We no longer use the global useLoading hook here because RouteLoader handles it per page
 
   return (
     <div className="min-h-screen w-full font-sans relative">
@@ -127,6 +154,7 @@ const AppContent = () => {
 
       <BrowserRouter>
         <ScrollToTop />
+        <RouteLoader />
         <Routes>
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/projects" element={<Layout><Projects /></Layout>} />
