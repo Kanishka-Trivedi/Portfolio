@@ -222,10 +222,10 @@
 //       </div>
 
 //       <div className="relative z-10 px-6 md:px-12 lg:px-16 max-w-[1400px] mx-auto pt-32 pb-40">
-        
+
 //         {/* Main Grid: Image Left, Content Right */}
 //         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 min-h-[80vh]">
-          
+
 //           {/* LEFT: Sticky Image Card */}
 //           <div className="relative">
 //             <div 
@@ -443,26 +443,26 @@ const WorkSection: React.FC = () => {
 
     const ctx = gsap.context(() => {
       const lastProject = projectRefs.current[projects.length - 1];
-      
+
       if (imageCardRef.current && lastProject && sectionRef.current) {
         // Calculate proper end position
         // We want the last project's center to align with image center
         const imageRect = imageCardRef.current.getBoundingClientRect();
         const imageCenter = imageRect.height / 2;
-        
+
         // Get the last project's position relative to container
         const lastProjectTop = lastProject.offsetTop;
         const lastProjectHeight = lastProject.offsetHeight;
         const lastProjectCenter = lastProjectTop + (lastProjectHeight / 2);
-        
+
         // Calculate scroll distance needed
         // The pin should end when last project is centered in viewport
         const viewportCenter = window.innerHeight / 2;
         const scrollOffset = lastProjectCenter - viewportCenter;
-        
+
         // Add padding to ensure proper alignment
         const endValue = `+=${Math.max(scrollOffset, 0)}`;
-        
+
         pinTriggerRef.current = ScrollTrigger.create({
           trigger: sectionRef.current,
           start: 'top top',
@@ -511,6 +511,9 @@ const WorkSection: React.FC = () => {
           },
           onEnter: () => setActiveIndex(index),
           onEnterBack: () => setActiveIndex(index),
+          onLeaveBack: () => {
+            if (index > 0) setActiveIndex(index - 1);
+          },
         });
 
         // For the last project, don't exit - stay visible and centered
@@ -563,8 +566,8 @@ const WorkSection: React.FC = () => {
         onComplete: () => {
           if (imageRef.current) {
             imageRef.current.src = projects[activeIndex].image;
-            gsap.to(imageRef.current, { 
-              opacity: 1, 
+            gsap.to(imageRef.current, {
+              opacity: 1,
               scale: 1,
               duration: 0.5,
               ease: 'power2.out'
@@ -576,26 +579,26 @@ const WorkSection: React.FC = () => {
   }, [activeIndex]);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative bg-[#0a0a0a]"
     >
       {/* Background WORKS text */}
       <div className="fixed top-0 left-0 w-full h-screen pointer-events-none z-0 overflow-hidden">
         <h1 className="absolute top-8 left-6 text-[18vw] font-black uppercase tracking-tighter text-transparent"
-            style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.05)' }}>
+          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.05)' }}>
           WORKS
         </h1>
       </div>
 
       <div className="relative z-10 px-6 md:px-12 lg:px-16 max-w-[1400px] mx-auto pt-32 pb-40">
-        
+
         {/* Main Grid: Image Left, Content Right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-start">
-          
+
           {/* LEFT: Sticky Image Card */}
           <div className="relative lg:h-[calc(100vh-8rem)]">
-            <div 
+            <div
               ref={imageCardRef}
               className="lg:sticky lg:top-32 w-full max-w-[520px]"
             >
@@ -619,7 +622,7 @@ const WorkSection: React.FC = () => {
                 </div>
 
                 {/* Image */}
-                <img 
+                <img
                   ref={imageRef}
                   src={projects[0].image}
                   alt="Project"
@@ -633,14 +636,13 @@ const WorkSection: React.FC = () => {
           </div>
 
           {/* RIGHT: Scrolling Projects with Arc Animation */}
-          <div ref={projectsContainerRef} className="relative flex flex-col pt-0 lg:pt-32">
+          <div ref={projectsContainerRef} className="relative flex flex-col">
             {projects.map((project, index) => (
-              <div 
+              <div
                 key={project.id}
                 ref={el => projectRefs.current[index] = el}
-                className={`flex items-center justify-start pl-0 lg:pl-8 ${
-                  index === 0 ? 'min-h-[60vh]' : ''
-                } ${index === projects.length - 1 ? 'min-h-[50vh]' : 'min-h-[80vh]'}`}
+                className={`flex justify-start pl-0 lg:pl-8 ${index === 0 ? 'min-h-[100vh] pt-52' : index === projects.length - 1 ? 'min-h-[50vh] items-center' : 'min-h-[100vh] items-center'
+                  }`}
               >
                 <div className="project-text-wrapper max-w-md will-change-transform">
                   {/* Mobile image */}
@@ -664,20 +666,20 @@ const WorkSection: React.FC = () => {
                   </p>
 
                   {/* View All Projects link (last item only) */}
-                  {index === projects.length - 1 && (
-                    <a 
+                  {/* {index === projects.length - 1 && (
+                    <a
                       href="#"
                       className="inline-flex items-center gap-2 px-5 py-2.5 mb-6 border border-purple-500/30 rounded-lg text-sm text-purple-400 hover:bg-purple-500/10 transition-colors"
                     >
                       View All Projects
                       <span>→</span>
                     </a>
-                  )}
+                  )} */}
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, i) => (
-                      <span 
+                      <span
                         key={i}
                         className="px-3 py-1.5 text-xs text-gray-300 bg-white/5 border border-white/10 rounded-full"
                       >
