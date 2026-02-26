@@ -179,14 +179,14 @@ const Home = () => {
       </section>
 
 
-      <section id="features" className="section-container pt-20">
+      <section id="features" className="section-container relative z-10 pt-20">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h2 className="section-title text-center text-3xl md:text-5xl font-bold text-white mb-12">
+          <h2 className="text-center text-4xl md:text-6xl font-bold text-white mb-12">
             Core <span className="text-[#c77dff]">Capabilities</span>
           </h2>
           <FeaturesSectionDemo />
@@ -194,7 +194,7 @@ const Home = () => {
       </section>
 
       {/* GitHub Contribution Chart Section */}
-      <section className="section-container pb-20 pt-10">
+      <section className="section-container relative z-10 pb-20 pt-10">
         <motion.div
           className="max-w-6xl mx-auto px-6"
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -203,7 +203,7 @@ const Home = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
         >
           <div className="mb-10 text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
               Coding <span className="text-[#c77dff]">Activity</span>
             </h2>
           </div>
