@@ -370,6 +370,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import ScrollLayout from './ScrollLayout';
 import {
   Github,
   ExternalLink,
@@ -681,111 +682,117 @@ const ProjectsPage = () => {
           </div>
         </div>
 
-        {/* 4. Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => {
-              const isFrontend = project.category === 'Frontend';
-              const isBackend = project.category === 'Backend';
+        {/* 4. Project Grid / Scroll Layout */}
+        <div className="w-full min-h-[50vh]">
+          {layoutView === 'grid' ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project) => {
+                  const isFrontend = project.category === 'Frontend';
+                  const isBackend = project.category === 'Backend';
 
-              const themeColor = isFrontend ? '#6366f1' : isBackend ? '#ec4899' : '#10b981';
-              const themeBg = isFrontend ? 'bg-[#6366f125]' : isBackend ? 'bg-[#ec489925]' : 'bg-[#10b98125]';
+                  const themeColor = isFrontend ? '#6366f1' : isBackend ? '#ec4899' : '#10b981';
+                  const themeBg = isFrontend ? 'bg-[#6366f125]' : isBackend ? 'bg-[#ec489925]' : 'bg-[#10b98125]';
 
-              return (
-                <motion.div
-                  layout
-                  key={project.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className="group relative bg-[#09090b] border border-[#1a1a1a] rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_-10px_rgba(0,0,0,0.5)]"
-                >
-                  {/* Hover Gradient Border Effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem] z-20"
-                    style={{
-                      border: `2px solid ${themeColor}`,
-                      maskImage: 'linear-gradient(to bottom, black, transparent)',
-                      WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)'
-                    }}
-                  />
+                  return (
+                    <motion.div
+                      layout
+                      key={project.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.4 }}
+                      className="group relative bg-[#09090b] border border-[#1a1a1a] rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_-10px_rgba(0,0,0,0.5)]"
+                    >
+                      {/* Hover Gradient Border Effect */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[2rem] z-20"
+                        style={{
+                          border: `2px solid ${themeColor}`,
+                          maskImage: 'linear-gradient(to bottom, black, transparent)',
+                          WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)'
+                        }}
+                      />
 
-                  {/* Image Section (Normal color by default) */}
-                  <div className="relative aspect-[1.4/1] m-2 overflow-hidden rounded-[1.6rem] z-10">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                    />
+                      {/* Image Section (Normal color by default) */}
+                      <div className="relative aspect-[1.4/1] m-2 overflow-hidden rounded-[1.6rem] z-10">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                        />
 
-                    {/* Darkened Overlay on Hover */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Darkened Overlay on Hover */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    {/* Emerging Links Container */}
-                    <div className="absolute inset-0 flex items-center justify-center gap-6">
-                      {/* GitHub Link */}
-                      <motion.a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75 p-4 bg-[#212121] text-white rounded-full shadow-2xl"
-                      >
-                        <Github size={28} />
-                      </motion.a>
+                        {/* Emerging Links Container */}
+                        <div className="absolute inset-0 flex items-center justify-center gap-6">
+                          {/* GitHub Link */}
+                          <motion.a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75 p-4 bg-[#212121] text-white rounded-full shadow-2xl"
+                          >
+                            <Github size={28} />
+                          </motion.a>
 
-                      {/* Live Link (Purple Gradient) */}
-                      <motion.a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 p-4 bg-gradient-to-br from-[#8b5cf6] to-[#a855f7] text-white rounded-full shadow-2xl"
-                      >
-                        <ExternalLink size={28} />
-                      </motion.a>
-                    </div>
+                          {/* Live Link (Purple Gradient) */}
+                          <motion.a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 p-4 bg-gradient-to-br from-[#8b5cf6] to-[#a855f7] text-white rounded-full shadow-2xl"
+                          >
+                            <ExternalLink size={28} />
+                          </motion.a>
+                        </div>
 
-                    <div className="absolute top-4 right-4 bg-[#00000080] backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold text-[#d1d1d1] border border-white/10">
-                      {project.year}
-                    </div>
-                  </div>
+                        <div className="absolute top-4 right-4 bg-[#00000080] backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold text-[#d1d1d1] border border-white/10">
+                          {project.year}
+                        </div>
+                      </div>
 
-                  {/* Card Body */}
-                  <div className="p-8 pt-4 relative z-10">
-                    <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md mb-4 inline-block ${themeBg}`} style={{ color: themeColor }}>
-                      {project.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-white mb-1 tracking-tight group-hover:text-[#9478ff] transition-colors">{project.title}</h3>
-
-                    {/* Tagline matching category color */}
-                    <p className="text-[13px] font-semibold mb-4" style={{ color: themeColor }}>{project.tagline}</p>
-
-                    <p className="text-[#808080] text-sm leading-relaxed mb-6 line-clamp-2">{project.description}</p>
-                    <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8">
-                      {project.features.map(f => (
-                        <span key={f} className="text-[11px] text-[#555] font-medium flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full" style={{ backgroundColor: themeColor }} /> {f}
+                      {/* Card Body */}
+                      <div className="p-8 pt-4 relative z-10">
+                        <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md mb-4 inline-block ${themeBg}`} style={{ color: themeColor }}>
+                          {project.category}
                         </span>
-                      ))}
-                    </div>
-                    <button className="w-full py-3.5 rounded-full bg-[#121212] border border-[#1a1a1a] group-hover:bg-white group-hover:text-black transition-all duration-500 flex items-center justify-center gap-2 font-bold text-sm">
-                      View Project <ArrowRight size={18} />
-                    </button>
-                  </div>
+                        <h3 className="text-2xl font-bold text-white mb-1 tracking-tight group-hover:text-[#9478ff] transition-colors">{project.title}</h3>
 
-                  {/* Bottom Highlight Bar (Hover Effect) */}
-                  <div
-                    className="absolute bottom-0 left-0 h-1 w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20"
-                    style={{ backgroundColor: themeColor }}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                        {/* Tagline matching category color */}
+                        <p className="text-[13px] font-semibold mb-4" style={{ color: themeColor }}>{project.tagline}</p>
+
+                        <p className="text-[#808080] text-sm leading-relaxed mb-6 line-clamp-2">{project.description}</p>
+                        <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8">
+                          {project.features.map(f => (
+                            <span key={f} className="text-[11px] text-[#555] font-medium flex items-center gap-2">
+                              <span className="w-1 h-1 rounded-full" style={{ backgroundColor: themeColor }} /> {f}
+                            </span>
+                          ))}
+                        </div>
+                        <button className="w-full py-3.5 rounded-full bg-[#121212] border border-[#1a1a1a] group-hover:bg-white group-hover:text-black transition-all duration-500 flex items-center justify-center gap-2 font-bold text-sm">
+                          View Project <ArrowRight size={18} />
+                        </button>
+                      </div>
+
+                      {/* Bottom Highlight Bar (Hover Effect) */}
+                      <div
+                        className="absolute bottom-0 left-0 h-1 w-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20"
+                        style={{ backgroundColor: themeColor }}
+                      />
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+          ) : (
+            <ScrollLayout projects={filteredProjects} />
+          )}
         </div>
 
         {/* 5. Collaboration Section */}
