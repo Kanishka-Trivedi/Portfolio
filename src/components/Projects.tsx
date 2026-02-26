@@ -185,7 +185,7 @@
 
 //   return (
 //     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-purple-500/30 overflow-x-hidden relative">
-      
+
 //       {/* 1. Background System: High-Visibility Grid + Spheres */}
 //       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
 //         <div className="absolute inset-0 opacity-[0.15]" 
@@ -207,7 +207,7 @@
 //       </div>
 
 //       <main className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-20">
-        
+
 //         {/* 2. Header Section: Fixed 'e' Clipping */}
 //         <div className="text-center mb-16">
 //           <motion.h1 
@@ -254,7 +254,7 @@
 //             {filteredProjects.map((project) => {
 //               const isFrontend = project.category === 'Frontend';
 //               const isBackend = project.category === 'Backend';
-              
+
 //               // Define theme colors based on category
 //               const themeColor = isFrontend ? '#6366f1' : isBackend ? '#ec4899' : '#10b981';
 //               const themeBg = isFrontend ? 'bg-[#6366f125]' : isBackend ? 'bg-[#ec489925]' : 'bg-[#10b98125]';
@@ -296,7 +296,7 @@
 //                     <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md mb-4 inline-block ${themeBg}`} style={{ color: themeColor }}>
 //                       {project.category}
 //                     </span>
-                    
+
 //                     <h3 className="text-2xl font-bold text-white mb-1 tracking-tight">
 //                       {project.title}
 //                     </h3>
@@ -370,16 +370,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Github, 
-  ExternalLink, 
-  ArrowRight, 
-  Rocket, 
-  Database, 
-  Server, 
+import {
+  Github,
+  ExternalLink,
+  ArrowRight,
+  Rocket,
+  Database,
+  Server,
   Monitor,
-  Layout,
-  Smartphone
+  LayoutGrid,
+  LayoutList
 } from 'lucide-react';
 
 // --- Types ---
@@ -570,6 +570,7 @@ const projects: Project[] = [
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState('All Projects');
+  const [layoutView, setLayoutView] = useState<'grid' | 'scroll'>('grid');
   const navigate = useNavigate();
 
   const categories = [
@@ -579,8 +580,8 @@ const ProjectsPage = () => {
     { name: 'Frontend', icon: <Monitor size={16} />, count: projects.filter(p => p.category === 'Frontend').length },
   ];
 
-  const filteredProjects = filter === 'All Projects' 
-    ? projects 
+  const filteredProjects = filter === 'All Projects'
+    ? projects
     : projects.filter(p => p.category === filter);
 
   return (
@@ -628,22 +629,56 @@ const ProjectsPage = () => {
           </motion.p>
         </div>
 
-        {/* 3. Filter Navigation */}
-        <div className="flex flex-wrap justify-center gap-4 mb-20">
-          {categories.map((cat) => (
-            <button
-              key={cat.name}
-              onClick={() => setFilter(cat.name)}
-              className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 ${filter === cat.name
+        {/* 3. Tools Navigation & Filter Layout */}
+        <div className="relative flex flex-col items-center justify-center gap-6 mb-20">
+
+          {/* Filters (Always Centered) */}
+          <div className="flex flex-wrap justify-center gap-4">
+            {categories.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => setFilter(cat.name)}
+                className={`flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 ${filter === cat.name
                   ? 'bg-[#1c1435] border-[#4a3a8a] text-white'
                   : 'bg-[#0d0d0d] border-[#1a1a1a] text-[#707070] hover:border-[#333]'
-                }`}
+                  }`}
+              >
+                <span className={filter === cat.name ? "text-[#9478ff]" : ""}>{cat.icon}</span>
+                <span className="text-sm font-semibold tracking-tight">{cat.name}</span>
+                <span className={`ml-2 px-2 py-0.5 rounded-full text-[10px] ${filter === cat.name ? 'bg-[#332561] text-white' : 'bg-[#1a1a1a] text-[#555]'}`}>{cat.count}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Layout Toggle (Right Aligned on Desktop) */}
+          <div className="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 flex items-center p-1.5 rounded-full bg-[#0a0a0a] border border-[#1a1a1a] shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            <button
+              onClick={() => setLayoutView('grid')}
+              className={`relative flex items-center justify-center p-3 rounded-full transition-colors duration-300 ${layoutView === 'grid' ? 'text-white' : 'text-[#707070] hover:text-white'}`}
+              title="Grid Layout"
             >
-              <span className={filter === cat.name ? "text-[#9478ff]" : ""}>{cat.icon}</span>
-              <span className="text-sm font-semibold tracking-tight">{cat.name}</span>
-              <span className={`ml-2 px-2 py-0.5 rounded-full text-[10px] ${filter === cat.name ? 'bg-[#332561] text-white' : 'bg-[#1a1a1a] text-[#555]'}`}>{cat.count}</span>
+              {layoutView === 'grid' && (
+                <motion.div
+                  layoutId="activeLayout"
+                  className="absolute inset-0 bg-[#1c1435] border border-[#4a3a8a] rounded-full shadow-[0_0_15px_rgba(74,58,138,0.4)]"
+                />
+              )}
+              <LayoutGrid size={18} className="relative z-10" />
             </button>
-          ))}
+            <button
+              onClick={() => setLayoutView('scroll')}
+              className={`relative flex items-center justify-center p-3 rounded-full transition-colors duration-300 ${layoutView === 'scroll' ? 'text-white' : 'text-[#707070] hover:text-white'}`}
+              title="Scroll Layout"
+            >
+              {layoutView === 'scroll' && (
+                <motion.div
+                  layoutId="activeLayout"
+                  className="absolute inset-0 bg-[#1c1435] border border-[#4a3a8a] rounded-full shadow-[0_0_15px_rgba(74,58,138,0.4)]"
+                />
+              )}
+              <LayoutList size={18} className="relative z-10" />
+            </button>
+          </div>
         </div>
 
         {/* 4. Project Grid */}
@@ -652,7 +687,7 @@ const ProjectsPage = () => {
             {filteredProjects.map((project) => {
               const isFrontend = project.category === 'Frontend';
               const isBackend = project.category === 'Backend';
-              
+
               const themeColor = isFrontend ? '#6366f1' : isBackend ? '#ec4899' : '#10b981';
               const themeBg = isFrontend ? 'bg-[#6366f125]' : isBackend ? 'bg-[#ec489925]' : 'bg-[#10b98125]';
 
@@ -683,7 +718,7 @@ const ProjectsPage = () => {
                       alt={project.title}
                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                     />
-                    
+
                     {/* Darkened Overlay on Hover */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -725,10 +760,10 @@ const ProjectsPage = () => {
                       {project.category}
                     </span>
                     <h3 className="text-2xl font-bold text-white mb-1 tracking-tight group-hover:text-[#9478ff] transition-colors">{project.title}</h3>
-                    
+
                     {/* Tagline matching category color */}
                     <p className="text-[13px] font-semibold mb-4" style={{ color: themeColor }}>{project.tagline}</p>
-                    
+
                     <p className="text-[#808080] text-sm leading-relaxed mb-6 line-clamp-2">{project.description}</p>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8">
                       {project.features.map(f => (
