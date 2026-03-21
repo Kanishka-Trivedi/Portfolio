@@ -183,33 +183,33 @@ const SkillsSphere: React.FC = () => {
   const [rotation, setRotation] = useState(0);
   const requestRef = useRef<number>();
   const speedRef = useRef(0.15);
-  const radius = 180;
+  const radius = 250;
 
   const skills = useMemo(() => {
     const skillsData = [
-      { name: 'JavaScript', size: 'text-xl md:text-2xl', color: '#f7df1e' },
-      { name: 'React.js', size: 'text-2xl md:text-3xl', color: '#61dafb' },
-      { name: 'Node.js', size: 'text-2xl md:text-3xl', color: '#339933' },
-      { name: 'Next.js', size: 'text-lg md:text-xl', color: '#3776ab' },
-      { name: 'CSS3', size: 'text-base md:text-lg', color: '#264de4' },
-      { name: 'HTML5', size: 'text-sm md:text-base', color: '#e34c26' },
-      { name: 'Express.js', size: 'text-base md:text-lg', color: '#ffffff' },
-      { name: 'MongoDB', size: 'text-xl md:text-2xl', color: '#47a248' },
-      { name: 'Redis', size: 'text-2xl md:text-3xl', color: '#dc382d' },
-      { name: 'MySQL', size: 'text-lg md:text-xl', color: '#4479a1' },
-      { name: 'Git', size: 'text-2xl md:text-3xl', color: '#f05032' },
-      { name: 'Java', size: 'text-xl md:text-2xl', color: '#007396' },
-      { name: 'Postman', size: 'text-2xl md:text-3xl', color: '#ff6c37' },
-      { name: 'REST API', size: 'text-base md:text-lg', color: '#ffffff' },
-      { name: 'GSAP', size: 'text-sm md:text-base', color: '#88ce02' },
-      { name: 'Three.js', size: 'text-base md:text-lg', color: '#ffffff' },
-      { name: 'Tailwind', size: 'text-base md:text-lg', color: '#38bdf8' },
-      { name: 'Firebase', size: 'text-lg md:text-xl', color: '#ffca28' },
-      { name: 'ShadCN', size: 'text-sm md:text-base', color: '#ffffff' },
-      { name: 'Figma', size: 'text-sm md:text-base', color: '#a259ff' },
-      { name: 'ScrollTrigger', size: 'text-sm md:text-base', color: '#88ce02' },
-      { name: 'Render', size: 'text-base md:text-lg', color: '#46e3b7' },
-      { name: 'DSA', size: 'text-sm md:text-base', color: '#ffffff' },
+      { name: 'JavaScript', size: 'text-2xl md:text-3xl', color: '#f7df1e' },
+      { name: 'React.js', size: 'text-3xl md:text-4xl', color: '#61dafb' },
+      { name: 'Node.js', size: 'text-3xl md:text-4xl', color: '#339933' },
+      { name: 'Next.js', size: 'text-xl md:text-2xl', color: '#3776ab' },
+      { name: 'CSS3', size: 'text-lg md:text-xl', color: '#264de4' },
+      { name: 'HTML5', size: 'text-base md:text-lg', color: '#e34c26' },
+      { name: 'Express.js', size: 'text-lg md:text-xl', color: '#ffffff' },
+      { name: 'MongoDB', size: 'text-2xl md:text-3xl', color: '#47a248' },
+      { name: 'Redis', size: 'text-3xl md:text-4xl', color: '#dc382d' },
+      { name: 'MySQL', size: 'text-xl md:text-2xl', color: '#4479a1' },
+      { name: 'Git', size: 'text-3xl md:text-4xl', color: '#f05032' },
+      { name: 'Java', size: 'text-2xl md:text-3xl', color: '#007396' },
+      { name: 'Postman', size: 'text-3xl md:text-4xl', color: '#ff6c37' },
+      { name: 'REST API', size: 'text-lg md:text-xl', color: '#ffffff' },
+      { name: 'GSAP', size: 'text-base md:text-lg', color: '#88ce02' },
+      { name: 'Three.js', size: 'text-lg md:text-xl', color: '#ffffff' },
+      { name: 'Tailwind', size: 'text-lg md:text-xl', color: '#38bdf8' },
+      { name: 'Firebase', size: 'text-xl md:text-2xl', color: '#ffca28' },
+      { name: 'ShadCN', size: 'text-base md:text-lg', color: '#ffffff' },
+      { name: 'Figma', size: 'text-base md:text-lg', color: '#a259ff' },
+      { name: 'ScrollTrigger', size: 'text-base md:text-lg', color: '#88ce02' },
+      { name: 'Render', size: 'text-lg md:text-xl', color: '#46e3b7' },
+      { name: 'DSA', size: 'text-base md:text-lg', color: '#ffffff' },
     ];
 
     const points: Skill[] = [];
@@ -273,18 +273,12 @@ const SkillsSphere: React.FC = () => {
               />
             </div>
 
-      {/* TITLE — perfectly centered above sphere */}
-      <div className="pt-8 pb-0 mb-0 text-center">
-        <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-[#7dd3fc] mb-3 drop-shadow-lg">
-          Tech Universe
-        </h1>
-        <div className="w-40 h-1 bg-purple-500 mx-auto rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
-      </div>
+      {/* TITLE REMOVED AS REQUESTED */}
 
       {/* SPHERE */}
       <div
-        className="relative w-full h-[520px] md:h-[570px] flex items-center justify-center cursor-grab active:cursor-grabbing -ml-20 md:-ml-25"
-        style={{ perspective: '1000px' }}
+        className="relative w-full h-[600px] md:h-[700px] flex items-center justify-center cursor-grab active:cursor-grabbing -ml-20 md:-ml-25"
+        style={{ perspective: '1200px' }}
       >
         <div className="relative w-0 h-0" style={{ transformStyle: 'preserve-3d' }}>
           {skills.map(skill => {
@@ -372,38 +366,50 @@ const Technologies = () => {
   const handleImageError = (name: string) => setImageErrors(prev => ({ ...prev, [name]: true }));
 
   return (
-    <section id="technologies" className="section-container">
+    <section id="technologies" className="section-container pt-32 md:pt-40">
+      
+      {/* Amazing Header Section - Layered high to avoid blur */}
+      <div className="relative z-20 text-center mb-24">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          className="text-6xl md:text-[5.5rem] font-bold tracking-tighter leading-[1.05] mb-8"
+        >
+          Mastered with<br />
+          <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#9478ff] to-[#f244ff] pr-4">
+            Precision & Code
+          </span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+          className="text-[#949494] mt-8 max-w-xl mx-auto text-lg font-normal leading-relaxed"
+        >
+          A curated universe of technologies, frameworks, and tools I wield to craft 
+          scalable, high-performance, and visually stunning digital experiences.
+        </motion.p>
+      </div>
 
-      <SkillsSphere />
+      <div className="relative z-10 text-center">
+        <SkillsSphere />
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="text-center mb-16 mt-24"
-      >
-        <h2 className="section-title">Technologies I Work With</h2>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-          Cutting-edge tools and frameworks for building the future
-        </p>
-      </motion.div>
+      {/* Spacing between sphere and grid */}
+      <div className="h-20" />
 
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-16 gap-x-12">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-16 gap-x-12 relative z-10">
         {techGroups.map(group => (
-          <div key={group.label} className="flex flex-col items-center h-full">
-            <h3 className="text-xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
+          <div key={group.label} className="flex flex-col items-center h-full p-6 rounded-2xl bg-gray-900/20 backdrop-blur-sm border border-white/5 hover:bg-gray-900/30 transition-all duration-300">
+            <h3 className="text-xl font-bold mb-6 text-center bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 text-transparent bg-clip-text">
               {group.label}
             </h3>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6 w-full">
               {group.items.map(tech => (
-                <a key={tech.name} href={tech.docs} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group no-underline">
+                <a key={tech.name} href={tech.docs} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group no-underline transition-transform hover:scale-110">
                   {!imageErrors[tech.name] ? (
-                    <img src={tech.icon} alt={tech.name} className="w-10 h-10 object-contain" onError={() => handleImageError(tech.name)} />
+                    <img src={tech.icon} alt={tech.name} className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]" onError={() => handleImageError(tech.name)} />
                   ) : (
                     <div className="w-10 h-10 flex items-center justify-center border rounded text-blue-400 font-bold">{tech.name[0]}</div>
                   )}
-                  <span className="mt-1 text-xs text-gray-400 group-hover:text-blue-400">{tech.name}</span>
+                  <span className="mt-2 text-sm text-gray-300 group-hover:text-blue-300 text-center font-medium transition-colors">{tech.name}</span>
                 </a>
               ))}
             </div>

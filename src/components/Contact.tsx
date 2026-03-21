@@ -379,10 +379,10 @@ const ContactForm = () => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="section-container">
+    <section id="contact" className="section-container pt-24 md:pt-32">
       {/* 1. Background System: High-Visibility Grid + Floating Spheres */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 opacity-[0.15]"
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.1]"
           style={{
             backgroundImage: `linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
@@ -390,13 +390,13 @@ const Contact = () => {
         />
         <motion.div
           animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-[#1a103d] rounded-full blur-[120px]"
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[5%] left-[2%] w-[600px] h-[600px] bg-[#1a103d] rounded-full blur-[150px] opacity-60"
         />
         <motion.div
-          animate={{ x: [0, -40, 0], y: [0, 60, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-[#0d1b3e] rounded-full blur-[100px]"
+          animate={{ x: [0, -30, 0], y: [0, 40, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-[#0d1b3e] rounded-full blur-[120px] opacity-60"
         />
       </div>
       <div className="text-center mb-12">

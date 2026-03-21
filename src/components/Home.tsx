@@ -9,6 +9,7 @@ import FeaturesSectionDemo from '@/components/ui/features-section-demo-2';
 import { VortexBackground } from '@/components/ui/vortex-background';
 import Me from "../assets/Me.png";
 import MyImage from "../assets/MyImage.png";
+import ProjectSlider from './ProjectSlider';
 
 const Home = () => {
 
@@ -177,6 +178,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ---------------- PROJECT SLIDER SECTION ---------------- */}
+      <ProjectSlider />
 
 
       <section id="features" className="section-container relative z-10 pt-20">
