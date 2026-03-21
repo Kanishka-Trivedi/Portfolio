@@ -14,7 +14,7 @@ import ProjectSlider from './ProjectSlider';
 const Home = () => {
 
   const handleResumeView = () => {
-    window.open(`https://drive.google.com/file/d/1ShwUa6jIcXWAtOemanZYhP-IyacCldX6/view?usp=sharing`, '_blank');
+    window.open(`https://drive.google.com/file/d/180ISba4zB2DfQHxnEKD8Qnx6tQZqH-_J/view?usp=sharing`, '_blank');
   };
 
   const handleResumeDownload = () => {
